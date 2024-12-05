@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet"  href="/css/header-footer.css">
+    <link rel="stylesheet"  href="/css/login.css">
+    <link rel="stylesheet"  href="/css/font.css">
+    <title>Pepperoni Palace</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<header th:insert="~{parts :: header}" class="header"></header>
+<main>
+    <div class="mainpage">
+        <div class="loginBlock">
+            <div class="loginMessage red" th:if="${param.error}">
+                Неверное имя пользователя и/или пароль.</div>
+            <div class="loginMessage green" th:if="${param.logout}">
+                Вы вышли из аккаунта.</div>
+            <h2>Войти в аккаунт:</h2><br>
+            <form id="loginForm" class="loginForm" th:action="@{/login}" method="post">
+                <input type="text" name="username" id="username" placeholder="Введите имя пользователя">
+                <div class="password-input">
+                    <input type="password" name="password" id="password" placeholder="Введите пароль">
+                    <img class="eye-icon" src="images/eye-solid.svg">
+                </div>
+                <button name="submit" type="submit">Войти</button>
+            </form>
+            <form style="margin-top:50px;" class="loginForm" action="/reg">
+                <h2>Нет аккаунта?</h2>
+                <button>Зарегестрироваться</button>
+            </form>
+        </div>
+    </div>
+    <script src="/js/login.js"></script>
+    <script src="/js/auth.js"></script>
+    <footer th:insert="~{parts :: footer}"></footer>
+    <div class="footer-copyright"><p>© Спиридонов Матвей Сергеевич [ИКБО-30-22]</p></div>
+</main>
+</body>
+</html>

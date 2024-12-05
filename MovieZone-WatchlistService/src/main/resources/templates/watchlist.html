@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watchlist</title>
+    <link rel="stylesheet"  href="/css/header-footer.css">
+    <link rel="stylesheet"  href="/css/library.css">
+    <link rel="stylesheet"  href="/css/font.css">
+</head>
+<body>
+<header th:insert="~{parts :: header}" class="header"></header>
+<main>
+    <div class="libraryText">
+        <h1 style="display: inline;">Список просмотра пользователя: </h1>
+        <h1 style="display: inline;" th:text="${username}"></h1>
+    </div>
+    <div class="watchlist-container">
+        <div th:each="status : ${allStatuses}">
+            <h2 class="libraryText" th:text="${status}"></h2>
+                <div class="emptyMsg" th:if="${#lists.isEmpty(movies['__${status}__'])}">
+                    <p>В данной категории ничего нет.</p>
+                </div>
+                <div th:unless="${#lists.isEmpty(movies['__${status}__'])}">
+                    <div class="movieBlock" th:each="item : ${movies['__${status}__']}">
+                        <div class="movieImg">
+                            <img th:src="'data:image/png;base64,' + ${item.generateBase64Image()}" alt="Movie Poster">
+                        </div>
+                        <div class="movieInfo">
+                            <h2 th:text="${item.movie.name}"></h2>
+                            <p><strong>Описание:</strong> <span th:text="${item.movie.description}"></span></p>
+                            <p><strong>Общий рейтинг:</strong> <span th:text="${item.movie.rating}"></span></p>
+                            <p><strong>Ваш статус:</strong>
+                                <select th:name="'status_' + ${item.id}" th:id="'status_' + ${item.id}" th:data-id="${item.id}">
+                                    <option th:each="status : ${allStatuses}"
+                                            th:value="${status}"
+                                            th:text="${status}"
+                                            th:selected="${status.equals(item.watchStatus)}">
+
+                                    </option>
+                                </select>
+                            </p>
+                            <p><strong>Ваш рейтинг:</strong>
+                                <input type="number" step="0.1" min="0.0" max="10.0" th:value="${item.userRating}"
+                                    th:name="'rating_' + ${item.id}" th:data-id="${item.id}">
+                            </p>
+                            <p th:if="${item.movie.series}">
+                                <strong>Просмотрено серий:</strong>
+                                <span th:text="${item.watchedEpisodes}">0</span> /
+                                <span th:text="${item.totalEpisodes}">0</span>
+                                <button th:disabled="${item.watchedEpisodes >= item.totalEpisodes}"
+                                        th:data-id="${item.id}" class="increment-episode">+1 серия</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <script src="/js/auth.js"></script>
+    <footer th:insert="~{parts :: footer}"></footer>
+    <div class="footer-copyright"><p>© Спиридонов Матвей Сергеевич [ИКБО-30-22]</p></div>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('select[name^="status_"]').forEach(select => {
+            select.addEventListener('change', () => {
+                const movieId = select.dataset.id;
+                const newStatus = select.value;
+                fetch(`/graphql-watchlist`, {
+                    method: `POST`,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        query:
+                            `mutation{
+                                changeStatus(id: "${movieId}", status: "${newStatus}"){watchStatus}
+                            }`
+                        })
+                    })
+                sendRequest(`/watchlist`)
+                .then(response => response.text())
+                    .then(html => {
+                        document.open();
+                        document.write(html);
+                        document.close();
+                    });
+            });
+        });
+
+        document.querySelectorAll('input[name^="rating_"]').forEach(input => {
+            input.addEventListener('blur', () => {
+                const movieId = input.dataset.id;
+                const newRating = parseFloat(input.value);
+                fetch(`/graphql-watchlist`, {
+                    method: `POST`,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        query:
+                            `mutation{
+                                changeRating(id: "${movieId}", rating: ${newRating}){userRating}
+                            }`
+                        })
+                    })
+                sendRequest(`/watchlist`)
+                .then(response => response.text())
+                    .then(html => {
+                        document.open();
+                        document.write(html);
+                        document.close();
+                    });
+            });
+        });
+
+        document.querySelectorAll('.increment-episode').forEach(button => {
+            button.addEventListener('click', () => {
+                const movieId = button.dataset.id;
+                fetch(`/graphql-watchlist`, {
+                    method: `POST`,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        query:
+                            `mutation{
+                                incrementEpisodes(id: "${movieId}"){watchedEpisodes}
+                            }`
+                        })
+                    })
+                sendRequest(`/watchlist`)
+                .then(response => response.text())
+                    .then(html => {
+                        document.open();
+                        document.write(html);
+                        document.close();
+                    });
+            });
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+body{
+    margin:0;
+    background-color: #79b7fd;
+}
+main{
+    padding-top:60px;
+    width:auto;
+}
+.mainpage{
+    padding-top:75px;
+    padding-bottom:75px;
+    gap:50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height:auto;
+}
+.banner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align:center;
+    height:585px;
+    width:650px;
+    background-color: #ffffff3f;
+    border-radius: 25px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+a, h1{
+    text-decoration:none;
+    color: #cfdeff
+}

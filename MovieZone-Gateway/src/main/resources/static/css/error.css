@@ -1,0 +1,28 @@
+body{
+    margin:0;
+    background-color:  #79b7fd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:column;
+    height:100vh
+}
+h2{
+    font-size:48px;
+    text-align:center;
+    color: #ffffff;
+}
+a{
+    width: 350px;
+    padding: 25px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    transition: transform 0.2s;
+    text-align:center;
+    color: #ffffff;
+    text-decoration:none;
+    font-size:20px;
+}

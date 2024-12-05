@@ -1,0 +1,43 @@
+type Movie {
+    id: ID!
+    name: String!
+    releaseDate: String
+    description: String
+    rating: Float
+    series: Boolean
+    episodes: JSON
+    img: String
+}
+
+scalar JSON
+
+type Episode {
+    season: String
+    count: Int
+}
+
+input EpisodeInput {
+    season: String!
+    count: Int!
+}
+
+input MovieInput {
+    name: String!
+    releaseDate: String
+    description: String
+    rating: Float
+    series: Boolean
+    episodes: [EpisodeInput!]
+    img: String
+}
+
+type Query {
+    getMovieById(id: ID!): Movie
+    getAllMovies: [Movie!]
+}
+
+type Mutation {
+    createMovie(input: MovieInput!): Movie
+    updateMovie(id: ID!, input: MovieInput!): Movie
+    deleteMovie(id: ID!): Boolean
+}

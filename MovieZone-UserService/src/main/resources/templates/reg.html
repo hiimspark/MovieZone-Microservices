@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet"  href="/css/header-footer.css">
+    <link rel="stylesheet"  href="/css/reg.css">
+    <link rel="stylesheet"  href="/css/font.css">
+    <title>Pepperoni Palace</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<header th:insert="~{parts :: header}" class="header"></header>
+<main>
+    <div class="mainpage">
+        <div class="regBlock">
+            <h2>Зарегестрироваться:</h2><br>
+            <form id="regForm" class="regForm">
+                <input id="dataName" type="text" name="name" placeholder="Введите имя пользователя">
+                <div class="password-input">
+                    <input id="dataPassword" type="password" name="password" placeholder="Введите пароль">
+                    <img class="eye-icon" src="images/eye-solid.svg">
+                </div>
+                <div class="requirementsBlock">
+                    <ul class="requirements" style="list-style-type:none;">
+                        <li class="req invalid">8 или более символов;</li>
+                        <li class="req invalid">1 или более строчных букв (a-z)</li>
+                        <li class="req invalid">1 или более заглавных букв (A-Z)</li>
+                        <li class="req invalid">1 или более цифр (0-9)</li>
+                        <li class="req invalid">1 или более специальных символов (!...%)</li>
+                    </ul>
+                </div>
+                <button id="submit_button" type="submit">Создать аккаунт</button>
+                <script src="/js/reg.js"></script>
+                <script src="/js/auth.js"></script>
+            </form>
+        </div>
+    </div>
+    </div>
+    <footer th:insert="~{parts :: footer}"></footer>
+    <div class="footer-copyright"><p>© Спиридонов Матвей Сергеевич [ИКБО-30-22]</p></div>
+</main>
+</body>
+</html>

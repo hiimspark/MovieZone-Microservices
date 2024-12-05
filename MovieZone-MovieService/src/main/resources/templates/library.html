@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet"  href="/css/header-footer.css">
+    <link rel="stylesheet"  href="/css/library.css">
+    <link rel="stylesheet"  href="/css/font.css">
+    <title>MovieZone: Библиотека</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<header th:insert="~{parts :: header}" class="header"></header>
+<main>
+    <div class="libraryText">
+        <h2>Библиотека</h2>
+    </div>
+    <div class="mainpage">
+        <div th:each="mov: ${movies}">
+            <div th:insert="~{parts :: movie}"></div>
+        </div>
+    </div>
+    <input type="hidden" id="user-name" th:value="${name}">
+    <footer th:insert="~{parts :: footer}"></footer>
+    <script src="/js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.add_bar').forEach(button => {
+            button.addEventListener('click', () => {
+                const movieId = button.dataset.id;
+                const username = document.getElementById('user-name').value;
+                fetch(`/graphql-watchlist`, {
+                    method: `POST`,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        query:
+                            `mutation{
+                                addMovieToWatchlist(movieId: ${movieId}, username: "${username}"){id}
+                            }`
+                        })
+                    })
+            });
+        });
+    });
+    </script>
+    <div class="footer-copyright"><p>© Спиридонов Матвей Сергеевич [ИКБО-30-22]</p></div>
+</main>
+</body>
+</html>

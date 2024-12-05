@@ -1,0 +1,86 @@
+body{
+    margin:0;
+    background-color:  #79b7fd;
+}
+main{
+    padding-top:60px;
+    width:auto;
+}
+.mainpage{
+    padding-top:35px;
+    padding-bottom:75px;
+    gap:50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height:auto;
+}
+.libraryText{
+    text-align: center;
+    font-size: 2.5rem;
+}
+.emptyMsg{
+    text-align: center;
+    font-size: 2rem;
+}
+.movieBlock {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #ffffff3f;
+    border: 1px solid #c7fbff94;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 800px;
+    margin: 20px auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.movieBlock .movieImg{
+    flex: 1;
+    max-width: 300px;
+}
+.movieBlock .movieImg img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+.movieBlock .movieInfo {
+    flex: 2;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+}
+.movieBlock .movieInfo h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+.movieBlock .movieInfo p {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+}
+.movieBlock .movieButton {
+    text-align: center;
+    padding: 15px;
+}
+
+.movieBlock .movieButton button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.movieBlock .movieButton button:hover {
+    background-color: #0056b3;
+}

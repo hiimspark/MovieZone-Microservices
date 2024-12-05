@@ -1,0 +1,29 @@
+type Watchlist{
+    id: ID!
+    userId: ID!
+    movieId: ID!
+    totalEpisodes: Int
+    watchedEpisodes: Int
+    userRating: Float
+    watchStatus: String
+}
+
+input WatchlistInput{
+    userId: ID!
+    movieId: ID!
+    totalEpisodes: Int
+    watchedEpisodes: Int
+    rating: Float
+    watchStatus: String
+}
+
+type Query{
+    getUsersWatchlist(userId: ID!): [Watchlist!]
+}
+
+type Mutation{
+    addMovieToWatchlist(movieId: ID!, username: String!): Watchlist
+    changeStatus(id: ID!, status: String!): Watchlist
+    changeRating(id: ID!, rating: Float!): Watchlist
+    incrementEpisodes(id: ID!): Watchlist
+}

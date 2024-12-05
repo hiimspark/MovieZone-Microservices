@@ -1,0 +1,21 @@
+type User {
+    id: ID!
+    name: String!
+    roles: String!
+}
+
+input UserDTO {
+    name: String!
+    password: String!
+    roles: String!
+}
+
+type Query {
+    users: [User!]!
+    user(id: ID!): User
+}
+
+type Mutation {
+    createUser(input: UserDTO!): User!
+    deleteUser(id: ID!): Boolean!
+}

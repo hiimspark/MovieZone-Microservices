@@ -1,0 +1,92 @@
+<div th:fragment="header">
+    <a href="home" class="logo"><img src="images/favicon.png" width="30px" height="30px"><b>MovieZone</b></a>
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+    <ul class="menu">
+        <li><a href="home">Главная страница</a></li>
+        <li><a href="library">Библиотека</a>
+        <li sec:authorize="!isAuthenticated()">
+        <a href="login">Войти</a>
+        </li>
+        <li sec:authorize="!isAuthenticated()">
+            <a href="reg">Зарегестрироваться</a>
+        </li>
+        <li>
+            <a href="watchlist">Дневник просмотра</a>
+        </li>
+    </ul>
+</div>
+
+<div th:fragment="footer" class="footer-container">
+    <div class="footer-element footer-aboutus">
+        <h2>О нас</h2>
+        <p>MovieZone — ваш надежный спутник в мире кино и сериалов. Следите за своим прогрессом, ставьте оценки и планируйте, что посмотреть дальше. Созданный для киноманов, MovieZone помогает организовать вашу коллекцию фильмов и сериалов, с ним вы всегда будете знать, что смотреть сегодня вечером, и сможете делиться любимыми моментами с друзьями.</p>
+        <ul class="footer-buttons">
+            <li><div class="socialbutton vk"><img style="z-index:1; position:relative;" src="images/vk.png" width="35" height="35"></div></li>
+            <li><div class="socialbutton yt"><img style="z-index:1; position:relative;" src="images/yt.png" width="35" height="25"></div></li>
+            <li><div class="socialbutton rd"><img style="z-index:1; position:relative;" src="images/rd.png" width="35" height="35"></div></li>
+        </ul>
+
+    </div>
+    <div class="footer-element footer-menu">
+        <h2>Ссылки-меню</h2>
+        <ul>
+            <li><a href="home">Главная страница</a></li>
+            <li><a id="myLink" href="library">Библиотека</a>
+            <li sec:authorize="!isAuthenticated()">
+                <a href="login">Войти</a>
+            </li>
+            <li sec:authorize="!isAuthenticated()">
+                <a href="reg">Зарегестрироваться</a>
+            </li>
+            <li>
+                <a href="watchlist">Дневник просмотра</a>
+            </li>
+        </ul>
+    </div>
+    <div class="footer-element footer-contacts">
+        <h2>Контакты</h2>
+        <ul class="contacts-info">
+            <li>
+                <img src="images/pin.png" width="25" height="25">
+                <p>г.Москва, <br>проспект Вернадского,<br> д. 78</p>
+            </li>
+            <li>
+                <img src="images/phone.png" width="25" height="25">
+                <p><a href="tel:+79101715517">+7(910)171-55-17</a></p>
+            </li>
+            <li>
+                <img src="images/email.png" width="25" height="25">
+                <p><a href="mailto:mssp@yandex.ru">mssp@yandex.ru</a></p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div th:fragment="movie" class="movieBlock">
+    <div class="movieImg">
+        <img th:src="@{'data:image/png;base64,'+${mov.generateBase64Image()}}" alt="">
+    </div>
+    <div class="movieInfo">
+        <h2 th:text="${mov.name}"/>
+        <p>
+            <strong>Дата выхода:</strong>
+            <span th:text="${mov.releaseDate}"></span>
+        </p>
+        <p th:text="${mov.description}"/>
+        <p>
+            <strong>Рейтинг:</strong>
+            <span th:text="${mov.rating}"></span>
+        </p>
+        <p th:if="${mov.series}">
+            <strong>Количество серий: </strong>
+            <span th:text="${#aggregates.sum(mov.episodes.values())}"/>
+        </p>
+        <div class="movieButton">
+            <form id="addForm" class="add_form" action="library" method="get">
+                <input type="text" name="movieN" class="add_bar" style="display:none;" th:value="${mov.name}" title="Add">
+                <button id="add_button" type="submit">Добавить в список просмотра</button>
+            </form>
+        </div>
+    </div>
+</div>

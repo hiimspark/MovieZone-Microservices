@@ -1,0 +1,105 @@
+body{
+    margin:0;
+    background-color: #79b7fd;
+}
+main{
+    padding-top:60px;
+    width:auto;
+}
+.mainpage{
+    padding-top:75px;
+    padding-bottom:75px;
+    gap:50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height:auto;
+}
+
+.regBlock{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.regForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #ffffff3f;
+    border-radius: 10px;
+    padding: 20px;
+    padding-bottom:10px;
+    gap:20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    transform-style: preserve-3d;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.regBlock h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #cfdeff
+}
+
+.password-input{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding:10px;
+}
+
+.password-input .eye-icon
+{
+  position: fixed;
+  margin-top: -7.5px;
+  filter: opacity(0.50);
+  width: 25px;
+  height: auto;
+  right:0;
+  margin-right: 35px;
+  cursor: pointer;
+}
+
+.regForm input, .regForm button{
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    transition: transform 0.2s;
+}
+
+.regForm button:hover {
+    transform: scale(1.05);
+}
+
+.regForm button{
+    width:calc(97% - 1px);
+}
+
+.requirementsBlock{
+    margin-right:50px;
+}
+
+.valid:before{
+    content:"✅";
+    padding-right:20px;
+}
+
+.invalid:before{
+    content:"❌";
+    padding-right:20px;
+
+}

@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'VividSans';
+    src: url('/fonts/VividSans-Regular.woff2') format('woff2'),
+        url('/fonts/VividSans-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+a{
+    font-family: VividSans;
+}
+
+h1{
+    font-family: VividSans;
+}
+
+p{
+    font-family: VividSans;
+}
+
+footer p{
+    font-family: VividSans;
+}
+
+li{
+    font-family: VividSans;
+}
+
+button{
+    font-family: VividSans;
+}
+
+h3{
+    font-family: VividSans;
+}
+
+h2{
+    font-family: VividSans;
+}
+
